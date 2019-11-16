@@ -1,0 +1,15 @@
+{
+  "name": "conan/silverstripe-data-object-utils",
+  "license": "MIT",
+  "type": "silverstripe-vendormodule",
+  "require": {
+    "php": ">=7.1.0",
+    "silverstripe/framework": "^4",
+    "silverstripe/cms": "^4"
+  },
+  "autoload": {
+    "psr-4": {
+      "conan\\DataObjectUtils\\": "src/"
+    }
+  }
+}
