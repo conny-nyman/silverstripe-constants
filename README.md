@@ -60,5 +60,4 @@ en:
 ```
 
 # TODO:
-- Add more useful constants such as `Search filter modifiers`
 - Add useful wrappers for data type data fields, e.g. custom `Datetime` field which could take a default datetime value in the constructor, which would be used during column creation.
