@@ -5,9 +5,13 @@ Keep your Silverstripe CMS 4 code DRY!
 
 ## Constants
 - Data types
+- Search filter modifiers
 
 ## CMS fields util functions
 - Translate title and description on form fields using the same naming convention
+
+## Test/Validation utils
+- Generate error message strings
 
 ## Example usage
 ```
@@ -58,6 +62,3 @@ en:
     MyStringField.Title: 'Translated title'
     MyStringField.Description: 'Translated description'
 ```
-
-# TODO:
-- Add useful wrappers for data type data fields, e.g. custom `Datetime` field which could take a default datetime value in the constructor, which would be used during column creation.
