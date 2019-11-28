@@ -1,5 +1,7 @@
 <?php
 
+namespace Conan\DataObjectUtils;
+
 class ErrorMessageUtils
 {
     /**
