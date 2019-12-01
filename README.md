@@ -6,6 +6,8 @@ Keep your Silverstripe CMS 4 code DRY!
 ## Constants
 - Data types
 - Search filter modifiers
+- Data object fields
+- Site tree fields
 
 ## CMS fields util functions
 - Translate title and description on form fields using the same naming convention
