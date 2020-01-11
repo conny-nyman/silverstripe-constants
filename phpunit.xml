@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/silverstripe/framework/tests/bootstrap.php" colors="true">
+    <testsuite name="Default">
+        <directory>tests</directory>
+    </testsuite>
+    <php>
+        <!-- USE YOUR CONFIG VALUES -->
+        <!-- <env name="SS_DATABASE_USERNAME" value="root" /> -->
+        <!-- <env name="SS_DATABASE_PASSWORD" value="" /> -->
+        <!-- <env name="SS_DATABASE_SERVER" value="127.0.0.1" /> -->
+        <!-- <env name="SS_DATABASE_CHOOSE_NAME" value="true" /> -->
+        <!-- <env name="SS_SQLITE_DATABASE_PATH" value=":memory:" /> -->
+        <!-- <env name="UNIT_TESTS_RUNNING" value="true" /> -->
+        <!-- <get name="flush" value="all" /> -->
+    </php>
+</phpunit>
