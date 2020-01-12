@@ -2,6 +2,11 @@
 
 namespace Conan\DataObjectUtils;
 
+/**
+ * Class DBConstants
+ * @package Conan\DataObjectUtils
+ * @deprecated
+ */
 class DBConstants
 {
     const BOOLEAN = 'Boolean';
