@@ -1,13 +1,14 @@
 # silverstripe-data-object-utils
-Silverstripe CMS 4 constants and CMS field util functions.
+Useful constants, CMS field helper functions and a permission extension for [Silverstripe CMS ^4](https://github.com/silverstripe/silverstripe-cms).
 
-Keep your Silverstripe CMS 4 code DRY!
+Keep your SilverStripe code DRY!
 
 ## Constants
 - Data types
 - Search filter modifiers
 - Data object fields
 - Site tree fields
+- Group fields
 
 ## CMS fields util functions
 - Translate title and description on form fields using the same naming convention
@@ -86,7 +87,7 @@ class MyClass extends DataObject
     public function getCMSFields() 
     {
         $fields = parent::getCMSFields();
-        $myStringField = $fields->fieldByName('Root.Main.' . self::MY_STRING_FIELD);
+        $myStringField = $fields->dataFieldByName(self::MY_STRING_FIELD);
         CMSFieldUtils::setTitle($myStringField, 'My title');
         CMSFieldUtils::setDescription($myStringField, 'My description');
     
