@@ -1,6 +1,7 @@
 <?php
 
-use Conan\DataObjectUtils\CMSFieldUtils;
+namespace Conan\DataObjectUtils;
+
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\FormField;
 

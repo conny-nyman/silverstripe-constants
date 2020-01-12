@@ -1,10 +1,12 @@
 <?php
 
-use Conan\DataObjectUtils\ErrorMessageUtils;
+namespace Conan\DataObjectUtils;
+
 use SilverStripe\Dev\SapphireTest;
 
 class ErrorMessageUtilsTest extends SapphireTest
 {
+    /** @var string  */
     private $mockField = 'MockField';
 
     public function testGetFieldMustBeSetError(): void
