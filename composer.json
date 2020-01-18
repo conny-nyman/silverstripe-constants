@@ -1,5 +1,6 @@
 {
   "name": "conan/silverstripe-data-object-utils",
+  "description": "Useful constants, CMS field helper functions and a permission extension for Silverstripe CMS ^4.",
   "license": "MIT",
   "type": "silverstripe-vendormodule",
   "require": {
