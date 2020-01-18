@@ -77,7 +77,7 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
         $this->assertEquals(true, $this->permissionExtension->canEdit($this->adminUser));
         $this->assertEquals(true, $this->permissionExtension->canEdit($this->authorUser));
         $this->assertEquals(false, $this->permissionExtension->canEdit($this->viewerUser));
-        $this->assertEquals(false, $this->permissionExtension->canView($this->noGroupUser));
+        $this->assertEquals(false, $this->permissionExtension->canEdit($this->noGroupUser));
     }
 
     public function testCanCreate(): void
@@ -85,7 +85,7 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
         $this->assertEquals(true, $this->permissionExtension->canCreate($this->adminUser));
         $this->assertEquals(true, $this->permissionExtension->canCreate($this->authorUser));
         $this->assertEquals(false, $this->permissionExtension->canCreate($this->viewerUser));
-        $this->assertEquals(false, $this->permissionExtension->canView($this->noGroupUser));
+        $this->assertEquals(false, $this->permissionExtension->canCreate($this->noGroupUser));
     }
 
     public function testCanDelete(): void
@@ -93,6 +93,6 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
         $this->assertEquals(true, $this->permissionExtension->canDelete($this->adminUser));
         $this->assertEquals(false, $this->permissionExtension->canDelete($this->authorUser));
         $this->assertEquals(false, $this->permissionExtension->canDelete($this->viewerUser));
-        $this->assertEquals(false, $this->permissionExtension->canView($this->noGroupUser));
+        $this->assertEquals(false, $this->permissionExtension->canDelete($this->noGroupUser));
     }
 }
