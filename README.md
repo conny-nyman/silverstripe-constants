@@ -115,3 +115,11 @@ en:
     MyStringField.Title: 'Translated title'
     MyStringField.Description: 'Translated description'
 ```
+
+## Versioning
+
+This library uses semantic versioning.
+
+## License
+
+`silverstripe-data-object-utils` is released under the MIT license. Please see the LICENSE file for more information.
