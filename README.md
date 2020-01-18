@@ -1,9 +1,16 @@
 # silverstripe-data-object-utils
+
+[![Build Status](https://travis-ci.com/conny-nyman/silverstripe-data-object-utils.png?branch=master)](https://travis-ci.org/conny-nyman/silverstripe-data-object-utils)
+[![codecov](https://codecov.io/gh/conny-nyman/silverstripe-data-object-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/conny-nyman/silverstripe-data-object-utils)
+
+## Description
+
 Useful constants, CMS field helper functions and a permission extension for [Silverstripe CMS ^4](https://github.com/silverstripe/silverstripe-cms).
 
 Keep your SilverStripe code DRY!
 
 ## Constants
+
 - Data types
 - Search filter modifiers
 - Data object fields
@@ -11,9 +18,11 @@ Keep your SilverStripe code DRY!
 - Group fields
 
 ## CMS fields util functions
+
 - Translate title and description on form fields using the same naming convention
 
 ## Test/Validation utils
+
 - Generate error message strings
 
 ## Data object permission extension
