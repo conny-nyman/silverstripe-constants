@@ -18,6 +18,18 @@ class CMSFieldUtils
     }
 
     /**
+     * @param bool $bool
+     * @return string
+     */
+    public static function notTested(bool $bool = false): string
+    {
+        if ($bool) {
+            return 'tested';
+        }
+        return 'not tested';
+    }
+
+    /**
      * @param FormField $field
      * @param string $description
      * @param string|null $callerClass
