@@ -65,6 +65,15 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
             [self::EXPECT => false, self::PERMISSION_METHOD => $canView, self::USER => $this->viewerUser],
             [self::EXPECT => false, self::PERMISSION_METHOD => $canView, self::USER => $this->noGroupUser],
         ]);
+
+        self::resetGroupPermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canView, self::USER => $this->adminUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canView, self::USER => $this->authorUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canView, self::USER => $this->viewerUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canView, self::USER => $this->noGroupUser],
+        ]);
     }
 
     public function testCanEdit(): void
@@ -95,6 +104,15 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
             [self::EXPECT => false, self::PERMISSION_METHOD => $canEdit, self::USER => $this->authorUser],
             [self::EXPECT => false, self::PERMISSION_METHOD => $canEdit, self::USER => $this->viewerUser],
             [self::EXPECT => false, self::PERMISSION_METHOD => $canEdit, self::USER => $this->noGroupUser],
+        ]);
+
+        self::resetGroupPermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canEdit, self::USER => $this->adminUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canEdit, self::USER => $this->authorUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canEdit, self::USER => $this->viewerUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canEdit, self::USER => $this->noGroupUser],
         ]);
     }
 
@@ -127,11 +145,20 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
             [self::EXPECT => false, self::PERMISSION_METHOD => $canCreate, self::USER => $this->viewerUser],
             [self::EXPECT => false, self::PERMISSION_METHOD => $canCreate, self::USER => $this->noGroupUser],
         ]);
+
+        self::resetGroupPermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canCreate, self::USER => $this->adminUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canCreate, self::USER => $this->authorUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canCreate, self::USER => $this->viewerUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canCreate, self::USER => $this->noGroupUser],
+        ]);
     }
 
     public function testCanDelete(): void
     {
-        /** @var string $canCreate */
+        /** @var string $canDelete */
         $canDelete = 'canDelete';
 
         $this->assertPermission([
@@ -157,6 +184,15 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
             [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->authorUser],
             [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->viewerUser],
             [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->noGroupUser],
+        ]);
+
+        self::resetGroupPermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canDelete, self::USER => $this->adminUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canDelete, self::USER => $this->authorUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canDelete, self::USER => $this->viewerUser],
+            [self::EXPECT => null, self::PERMISSION_METHOD => $canDelete, self::USER => $this->noGroupUser],
         ]);
     }
 
@@ -256,6 +292,16 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
             [false],
             [false],
             [false]
+        );
+    }
+
+    protected static function resetGroupPermissions(): void
+    {
+        self::setGroupPermissionsToConfig(
+            [],
+            [],
+            [],
+            []
         );
     }
 
