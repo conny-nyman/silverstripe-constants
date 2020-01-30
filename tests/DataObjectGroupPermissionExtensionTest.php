@@ -160,6 +160,26 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
         ]);
     }
 
+    public function testAllowAny(): void
+    {
+        $this->assertEquals(true, DataObjectGroupPermissionExtension::allowAny([true]));
+        $this->assertEquals(false, DataObjectGroupPermissionExtension::allowAny([false]));
+
+        // Other group codes should not affect the allow "any" group code
+        $this->assertEquals(true, DataObjectGroupPermissionExtension::allowAny(['group-code', true]));
+        $this->assertEquals(false, DataObjectGroupPermissionExtension::allowAny(['group-code', false]));
+    }
+
+    public function testAllowNone(): void
+    {
+        $this->assertEquals(true, DataObjectGroupPermissionExtension::allowNone([false]));
+        $this->assertEquals(false, DataObjectGroupPermissionExtension::allowNone([true]));
+
+        // Other group codes should not affect the allow "none" group code
+        $this->assertEquals(true, DataObjectGroupPermissionExtension::allowNone(['group-code', false]));
+        $this->assertEquals(false, DataObjectGroupPermissionExtension::allowNone(['group-code', true]));
+    }
+
     /**
      * @param array(
      *  'expect' => bool,

@@ -103,7 +103,7 @@ class DataObjectGroupPermissionExtension extends DataExtension
      * @param array|null $groupCodes
      * @return bool
      */
-    protected static function allowAny($groupCodes): bool
+    public static function allowAny($groupCodes): bool
     {
         return in_array(true, $groupCodes, true);
     }
@@ -112,7 +112,7 @@ class DataObjectGroupPermissionExtension extends DataExtension
      * @param array|null $groupCodes
      * @return bool
      */
-    protected static function allowNone($groupCodes): bool
+    public static function allowNone($groupCodes): bool
     {
         return in_array(false, $groupCodes, true);
     }
