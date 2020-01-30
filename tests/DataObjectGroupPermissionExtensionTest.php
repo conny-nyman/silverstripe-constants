@@ -8,6 +8,13 @@ use SilverStripe\Security\Member;
 
 class DataObjectGroupPermissionExtensionTest extends SapphireTest
 {
+    /** @var string */
+    private const EXPECT = 'expect';
+    /** @var string */
+    private const PERMISSION_METHOD = 'permissionMethod';
+    /** @var string */
+    private const USER = 'user';
+
     /** @var bool */
     protected $usesDatabase = true;
     /** @var Member */
@@ -29,6 +36,147 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
         $this->permissionExtension = new DataObjectGroupPermissionExtension();
     }
 
+    public function testCanView(): void
+    {
+        /** @var string $canView */
+        $canView = 'canView';
+
+        $this->assertPermission([
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canView, self::USER => $this->adminUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canView, self::USER => $this->authorUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canView, self::USER => $this->viewerUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canView, self::USER => $this->noGroupUser],
+        ]);
+
+        self::setupAllowAnyPermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canView, self::USER => $this->adminUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canView, self::USER => $this->authorUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canView, self::USER => $this->viewerUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canView, self::USER => $this->noGroupUser],
+        ]);
+
+        self::setupAllowNonePermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canView, self::USER => $this->adminUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canView, self::USER => $this->authorUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canView, self::USER => $this->viewerUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canView, self::USER => $this->noGroupUser],
+        ]);
+    }
+
+    public function testCanEdit(): void
+    {
+        /** @var string $canEdit */
+        $canEdit = 'canEdit';
+
+        $this->assertPermission([
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canEdit, self::USER => $this->adminUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canEdit, self::USER => $this->authorUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canEdit, self::USER => $this->viewerUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canEdit, self::USER => $this->noGroupUser],
+        ]);
+
+        self::setupAllowAnyPermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canEdit, self::USER => $this->adminUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canEdit, self::USER => $this->authorUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canEdit, self::USER => $this->viewerUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canEdit, self::USER => $this->noGroupUser],
+        ]);
+
+        self::setupAllowNonePermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canEdit, self::USER => $this->adminUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canEdit, self::USER => $this->authorUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canEdit, self::USER => $this->viewerUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canEdit, self::USER => $this->noGroupUser],
+        ]);
+    }
+
+    public function testCanCreate(): void
+    {
+        /** @var string $canCreate */
+        $canCreate = 'canCreate';
+
+        $this->assertPermission([
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canCreate, self::USER => $this->adminUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canCreate, self::USER => $this->authorUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canCreate, self::USER => $this->viewerUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canCreate, self::USER => $this->noGroupUser],
+        ]);
+
+        self::setupAllowAnyPermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canCreate, self::USER => $this->adminUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canCreate, self::USER => $this->authorUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canCreate, self::USER => $this->viewerUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canCreate, self::USER => $this->noGroupUser],
+        ]);
+
+        self::setupAllowNonePermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canCreate, self::USER => $this->adminUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canCreate, self::USER => $this->authorUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canCreate, self::USER => $this->viewerUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canCreate, self::USER => $this->noGroupUser],
+        ]);
+    }
+
+    public function testCanDelete(): void
+    {
+        /** @var string $canCreate */
+        $canDelete = 'canDelete';
+
+        $this->assertPermission([
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canDelete, self::USER => $this->adminUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->authorUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->viewerUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->noGroupUser],
+        ]);
+
+        self::setupAllowAnyPermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canDelete, self::USER => $this->adminUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canDelete, self::USER => $this->authorUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canDelete, self::USER => $this->viewerUser],
+            [self::EXPECT => true, self::PERMISSION_METHOD => $canDelete, self::USER => $this->noGroupUser],
+        ]);
+
+        self::setupAllowNonePermissions();
+
+        $this->assertPermission([
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->adminUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->authorUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->viewerUser],
+            [self::EXPECT => false, self::PERMISSION_METHOD => $canDelete, self::USER => $this->noGroupUser],
+        ]);
+    }
+
+    /**
+     * @param array(
+     *  'expect' => bool,
+     *  'permissionMethod' => string,
+     *  'user' => string,
+     * ) $asserts
+     */
+    protected function assertPermission($asserts): void
+    {
+        foreach ($asserts as $assert) {
+            $this->assertEquals(
+                $assert[self::EXPECT],
+                $this->permissionExtension->{$assert[self::PERMISSION_METHOD]}($assert[self::USER])
+            );
+        }
+    }
+
     private function setupMembersAndGroups(): void
     {
         $adminGroup = TestUtils::createGroup('admin-group');
@@ -41,58 +189,67 @@ class DataObjectGroupPermissionExtensionTest extends SapphireTest
         $this->noGroupUser = TestUtils::createMember('no-group-user');
     }
 
-    private function setupGroupPermissions(): void
+    protected function setupGroupPermissions(): void
     {
-        Config::modify()->update(DataObjectGroupPermissionExtension::class, DataObjectGroupPermissionExtension::CAN_VIEW_GROUP_CODES, [
+        $canViewGroupCodes = [
             'admin-group-code',
             'author-group-code',
             'viewer-group-code',
-        ]);
+        ];
 
-        Config::modify()->update(DataObjectGroupPermissionExtension::class, DataObjectGroupPermissionExtension::CAN_EDIT_GROUP_CODES, [
+        $canEditGroupCodes = [
             'admin-group-code',
             'author-group-code',
-        ]);
+        ];
 
-        Config::modify()->update(DataObjectGroupPermissionExtension::class, DataObjectGroupPermissionExtension::CAN_CREATE_GROUP_CODES, [
+        $canCreateGroupCodes = [
             'admin-group-code',
             'author-group-code',
-        ]);
+        ];
 
-        Config::modify()->update(DataObjectGroupPermissionExtension::class, DataObjectGroupPermissionExtension::CAN_DELETE_GROUP_CODES, [
+        $canDeleteGroupCodes = [
             'admin-group-code',
-        ]);
+        ];
+
+        self::setGroupPermissionsToConfig(
+            $canViewGroupCodes,
+            $canEditGroupCodes,
+            $canCreateGroupCodes,
+            $canDeleteGroupCodes
+        );
     }
 
-    public function testCanView(): void
+    protected function setupAllowAnyPermissions(): void
     {
-        $this->assertEquals(true, $this->permissionExtension->canView($this->adminUser));
-        $this->assertEquals(true, $this->permissionExtension->canView($this->authorUser));
-        $this->assertEquals(true, $this->permissionExtension->canView($this->viewerUser));
-        $this->assertEquals(false, $this->permissionExtension->canView($this->noGroupUser));
+        self::setGroupPermissionsToConfig(
+            [true],
+            [true],
+            [true],
+            [true]
+        );
     }
 
-    public function testCanEdit(): void
+    protected static function setupAllowNonePermissions(): void
     {
-        $this->assertEquals(true, $this->permissionExtension->canEdit($this->adminUser));
-        $this->assertEquals(true, $this->permissionExtension->canEdit($this->authorUser));
-        $this->assertEquals(false, $this->permissionExtension->canEdit($this->viewerUser));
-        $this->assertEquals(false, $this->permissionExtension->canEdit($this->noGroupUser));
+        self::setGroupPermissionsToConfig(
+            [false],
+            [false],
+            [false],
+            [false]
+        );
     }
 
-    public function testCanCreate(): void
+    /**
+     * @param array $canViewGroups
+     * @param array $canEditGroups
+     * @param array $canCreateGroups
+     * @param array $canDeleteGroups
+     */
+    protected static function setGroupPermissionsToConfig($canViewGroups, $canEditGroups, $canCreateGroups, $canDeleteGroups): void
     {
-        $this->assertEquals(true, $this->permissionExtension->canCreate($this->adminUser));
-        $this->assertEquals(true, $this->permissionExtension->canCreate($this->authorUser));
-        $this->assertEquals(false, $this->permissionExtension->canCreate($this->viewerUser));
-        $this->assertEquals(false, $this->permissionExtension->canCreate($this->noGroupUser));
-    }
-
-    public function testCanDelete(): void
-    {
-        $this->assertEquals(true, $this->permissionExtension->canDelete($this->adminUser));
-        $this->assertEquals(false, $this->permissionExtension->canDelete($this->authorUser));
-        $this->assertEquals(false, $this->permissionExtension->canDelete($this->viewerUser));
-        $this->assertEquals(false, $this->permissionExtension->canDelete($this->noGroupUser));
+        Config::modify()->update(DataObjectGroupPermissionExtension::class, DataObjectGroupPermissionExtension::CAN_VIEW_GROUP_CODES, $canViewGroups);
+        Config::modify()->update(DataObjectGroupPermissionExtension::class, DataObjectGroupPermissionExtension::CAN_EDIT_GROUP_CODES, $canEditGroups);
+        Config::modify()->update(DataObjectGroupPermissionExtension::class, DataObjectGroupPermissionExtension::CAN_CREATE_GROUP_CODES, $canCreateGroups);
+        Config::modify()->update(DataObjectGroupPermissionExtension::class, DataObjectGroupPermissionExtension::CAN_DELETE_GROUP_CODES, $canDeleteGroups);
     }
 }
