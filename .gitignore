@@ -3,3 +3,8 @@ resources/
 vendor/
 composer.lock
 assets
+public/
+.htaccess
+.env
+src/Page.php
+docker-compose.yml

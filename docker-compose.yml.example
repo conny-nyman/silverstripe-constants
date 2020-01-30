@@ -1,0 +1,18 @@
+version: "3.5"
+
+services:
+
+  silverstripe-data-object-utils:
+    image: brettt89/silverstripe-web:7.3-debian-buster
+    container_name: silverstripe-data-object-utils
+    restart: always
+    network_mode: bridge
+    external_links:
+        - mariadb
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`silverstripe-data-object-utils.localhost`)
+      - traefik.http.routers.whoami.entrypoints=web
+    volumes:
+      - ./:/var/www/html
+  
